@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="TvShowCacheApi.API/TvShowCacheApi.API.csproj" />
+  <Project Path="TvShowCacheApi.Application/TvShowCacheApi.Application.csproj" />
+  <Project Path="TvShowCacheApi.Domain/TvShowCacheApi.Domain.csproj" />
+  <Project Path="TvShowCacheApi.Infrastructure/TvShowCacheApi.Infrastructure.csproj" />
+</Solution>
