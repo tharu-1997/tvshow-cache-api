@@ -1,4 +1,5 @@
 using TvShowCacheApi.API.Middleware;
+using TvShowCacheApi.Application.Interfaces;
 using TvShowCacheApi.Application.Services;
 using TvShowCacheApi.Infrastructure;
 
@@ -10,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-// Swagger / OpenAPI
+// Swagger 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -25,8 +26,8 @@ builder.Services.AddSwaggerGen(options =>
 // Register Infrastructure 
 builder.Services.AddInfrastructure();
 
-// Register Application services
-builder.Services.AddScoped<TvShowService>();
+// Register Application service using interface 
+builder.Services.AddScoped<ITvShowService, TvShowService>();
 
 
 var app = builder.Build();
@@ -34,12 +35,12 @@ var app = builder.Build();
 // Global exception handler
 app.UseMiddleware<GlobalExceptionMiddleware>();
 
-// Swagger 
+// Swagger
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "TV Show Cache API v1");
-    options.RoutePrefix = string.Empty; 
+    options.RoutePrefix = string.Empty;
 });
 
 app.UseHttpsRedirection();

@@ -88,6 +88,9 @@
 
 # 
 
+# SOLID Principles and Clean Architecture
+I applied the Dependency Inversion Principle throughout the codebase. The controller depends on ITvShowService (an interface) rather than TvShowService (the concrete class directly). This means the implementation can be swapped out without touching the controller at all. The same pattern applies between the service and repository layers. I also moved the cache-check logic out of the controller and into the service layer, because that decision belongs in business logic, not in HTTP handling code. Mapping between the domain entity and the DTO was moved into a dedicated Mappers folder for the same reason — the controller's only job is to handle HTTP requests and responses. CancellationToken is passed through all layers from the controller down to the database query, so if a client disconnects mid-request, the work stops immediately rather than continuing unnecessarily. 
+
 # 
 
 # Project Structure
@@ -104,11 +107,11 @@
 
 # │   ├── TvShowCacheApi.Domain/          # TvShow entity and repository interface
 
-# │   ├── TvShowCacheApi.Application/     # TvShowService (cache-first business logic)
+# │   ├── TvShowCacheApi.Application/     # TvShowService, ITvShowService interface
 
 # │   ├── TvShowCacheApi.Infrastructure/  # ADO.NET repository + TVMaze HTTP client
 
-# │   └── TvShowCacheApi.API/             # Controllers, middleware, Program.cs
+# │   └── TvShowCacheApi.API/             # Controllers, middleware, Program.cs, Mappers
 
 # ├── database/
 

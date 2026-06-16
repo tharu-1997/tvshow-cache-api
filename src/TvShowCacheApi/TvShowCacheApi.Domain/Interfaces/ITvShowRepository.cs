@@ -2,14 +2,11 @@
 
 namespace TvShowCacheApi.Domain.Interfaces;
 
-/// <summary>
-///  TV show data access.(ADO.NET.)
-/// </summary>
 public interface ITvShowRepository
 {
-    Task<IEnumerable<TvShow>> GetAllAsync();
-    Task<TvShow?> GetByIdAsync(int id);
-    Task<TvShow?> GetByNameAsync(string name);
-    Task SaveAsync(TvShow show);
-    Task<bool> ExistsAsync(int id);
+    Task<IEnumerable<TvShow>> GetAllAsync(CancellationToken ct = default);
+    Task<TvShow?> GetByIdAsync(int id, CancellationToken ct = default);
+    Task<TvShow?> GetByNameAsync(string name, CancellationToken ct = default);
+    Task SaveAsync(TvShow show, CancellationToken ct = default);
+    Task<bool> ExistsAsync(int id, CancellationToken ct = default);
 }
